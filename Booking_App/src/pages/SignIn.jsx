@@ -1,16 +1,10 @@
 // import React, { useState } from 'react';
 // import axios from "axios"
-
-// const LoginPage = () => {
+// const SignIn = () => {
 //   // State to store user input
 //   const [email, setEmail] = useState('');
 //   const [password, setPassword] = useState('');
 
-//   // Function to handle form submission
-//   const register = (e) => {
-//     e.preventDefault()
-//     axios.get("http://localhost:4000/test")
-//   };
 
 
 
@@ -56,19 +50,22 @@
 //   );
 // };
 
-// export default RegisterPage;
+// // export default SignInPage;
+// export default SignIn;
 
 
 
 
 import React, { useState } from 'react';
-import axios from "axios";
+import axios from "axios"
 
-const RegisterPage = () => {
+const SignIn = () => {
+  // State to store user input
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const register = (e) => {
+  // Function to handle form submission
+  const signin = (e) => {
     e.preventDefault();
     axios.get("http://localhost:4000/test")
       .then(response => {
@@ -81,11 +78,10 @@ const RegisterPage = () => {
   };
 
   return (
-    // ... Your registration form JSX ...
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded shadow-md w-96">
-        <h2 className="text-2xl font-semibold mb-4">Register</h2>
-        <form onSubmit={register}>
+        <h2 className="text-2xl font-semibold mb-4">SignIn</h2>
+        <form onSubmit={signin}>
           <div className="mb-4">
             <label htmlFor="email" className="block text-gray-600 text-sm font-medium mb-2">
               Email Address
@@ -116,11 +112,11 @@ const RegisterPage = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 focus:outline-none focus:border-blue-700 focus:ring focus:ring-blue-200">Register</button>
+            className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 focus:outline-none focus:border-blue-700 focus:ring focus:ring-blue-200">Sign in</button>
         </form>
       </div>
     </div>
   );
 };
 
-export default RegisterPage;
+export default SignIn;
