@@ -6,7 +6,7 @@ import SignInPage from './pages/SignIn'
 import Layout from './Layout'
 import axios from 'axios'
 
-axios.defaults.baseURL = 'https://localhost:4000'
+axios.defaults.baseURL = 'https://localhost:4000' ;
 
 
 function App() {

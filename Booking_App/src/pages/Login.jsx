@@ -220,14 +220,18 @@ const LoginPage = () => {
   // Function to handle form submission
   const register = (e) => {
     e.preventDefault();
-    axios.get("http://localhost:4000/test")
-      .then(response => {
-        console.log(response.data);
-        // Add your registration logic here
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+    // axios.get("http://localhost:4000/test")
+    axios.post("http://localhost:4000/login" , {
+      email,
+      password,
+    });
+      // .then(response => {
+      //   console.log(response.data);
+      //   // Add your registration logic here
+      // })
+      // .catch(error => {
+      //   console.error('Error:', error);
+      // });
   };
 
   // Return the JSX for the RegisterPage component
