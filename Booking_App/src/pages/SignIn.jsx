@@ -67,7 +67,11 @@ const SignIn = () => {
   // Function to handle form submission
   const signin = (e) => {
     e.preventDefault();
-    axios.get("http://localhost:4000/test")
+    // axios.get("http://localhost:4000/test")
+    axios.post("http://localhost:4000/signin" , {
+      email ,
+      password ,
+    })
       .then(response => {
         console.log(response.data);
         // Add your registration logic here

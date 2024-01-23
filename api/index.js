@@ -1,27 +1,23 @@
 const express = require("express");
-const cors = require('cors');
-const mongoose = require("mongoose")
-require('dotenv').config()
+const cors = require("cors");
 const app = express();
 
-
-app.use(express.json()) ; // Why use 
+app.use(express.json());
 
 app.use(cors({
     credentials: true,
-    origin: "http://localhost:5175"
+    origin: 'http://localhost:5174',
 }));
 
-console.log(process.env.MONGO_URL);
-mongoose.connect(process.env.MONGO_URL); 
-
-app.get('/test', (req, res) => {
-    res.json("Test ok");
+app.get("/test", (req, res) => {
+    res.json("test alright");
 });
 
-app.post('/login', (req, res) => {
-    const{email , password} = req.body
-    res.json({email , password});
+app.post("/signin", (req, res) => {
+    const { email, password } = req.body;
+    res.json({ email, password });
 });
 
-app.listen(4000);
+app.listen(4000, () => {
+    console.log("Server is running on port 4000");
+});
