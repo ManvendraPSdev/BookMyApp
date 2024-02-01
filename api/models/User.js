@@ -3,6 +3,7 @@ const {Schema} = mongoose ;
 // Creating the Schema for the the Database 
 
 const UserSchema = new Schema({
+    name : String ,
     email : {type : String , unique : true} ,
     password : String 
 }) ;

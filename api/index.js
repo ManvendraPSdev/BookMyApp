@@ -44,83 +44,30 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-// const User = require('./models/User.js');
-const bcrypt = require("bcryptjs");
 require('dotenv').config();
 const app = express();
 
-const bcryptSalt = bcrypt.genSaltSync(10);
+app.use(express.json());
 
 app.use(cors({
     credentials: true,
     origin: 'http://localhost:5174',
 }));
 
-app.use(express.json());
+
+mongoose.connect(process.env.MONGO_URL);
+
 
 app.get("/test", (req, res) => {
     res.json("test alright");
 });
 
-console.log(process.env.MONGO_URL);
-
-mongoose.connect(process.env.MONGO_URL);
-
 app.post("/signin", async (req, res) => {
-    try {
-        const { email, password } = req.body;
-
-        // Check if the email already exists
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return res.status(400).json({ message: "User with this email already exists" });
-        }
-
-        // Hash the password before saving it
-        const hashedPassword = bcrypt.hashSync(password, bcryptSalt);
-
-        // Create a new user with the hashed password
-        const newUser = await User.create({
-            email,
-            password: hashedPassword,
-        });
-
-        res.json(newUser);
-    } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({ message: "Internal Server Error" });
-    }
-});
-
-
-app.post("/login", async (req, res) => {
-    try {
-        const { email, password } = req.body;
-
-        // Check if the email already exists
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return res.status(400).json({ message: "User with this email already exists" });
-        }
-
-        // Hash the password before saving it
-        const hashedPassword = bcrypt.hashSync(password, bcryptSalt);
-
-        // Create a new user with the hashed password
-        const newUser = await User.create({
-            email,
-            password: hashedPassword,
-        });
-
-        res.json(newUser);
-    } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({ message: "Internal Server Error" });
-    }
-});
-
-
+    const {name , email, password } = req.body;
+    res.json({ name ,email, password });
+})
 
 app.listen(4000, () => {
     console.log("Server is running on port 4000");
 });
+
