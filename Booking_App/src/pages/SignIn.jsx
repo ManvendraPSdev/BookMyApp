@@ -65,10 +65,10 @@ const SignIn = () => {
   const [password, setPassword] = useState('');
 
   // Function to handle form submission
-  const signin = (e) => {
+   const signin = async (e) => {
     e.preventDefault();
     // axios.get("http://localhost:4000/test")
-    axios.post("http://localhost:4000/signin" , {
+    await axios.post("http://localhost:4000/signin" , {
       email ,
       password ,
     })
@@ -77,8 +77,10 @@ const SignIn = () => {
         // Add your registration logic here
       })
       .catch(error => {
+        alert("Sign up failed Please Try agian later ❌")
         console.error('Error:', error);
       });
+      alert("Sign up Sucessfull now you can Proceed 🟢🟢")
   };
 
   return (
