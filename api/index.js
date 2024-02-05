@@ -41,9 +41,48 @@
 //     console.log("Server is running on port 4000");
 // });
 
+// const express = require("express");
+// const cors = require("cors");
+// const mongoose = require("mongoose");
+// const User = require('./models/UserModified')
+// require('dotenv').config();
+// const app = express();
+
+// app.use(express.json());
+
+// app.use(cors({
+//     credentials: true,
+//     origin: 'http://localhost:5173',
+// }));
+
+
+// mongoose.connect(process.env.MONGO_URL);
+
+
+// app.get("/test", (req, res) => {
+//     res.json("test alright");
+// });
+
+// app.post("/signin", async (req, res) => {
+//     const {name , email, password } = req.body;
+//     User.create({
+//         UserName ,
+//         email ,
+//         password
+//     })
+// })
+
+// app.listen(4000, () => {
+//     console.log("Server is running on port 4000");
+// });
+
+
+
+
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const User = require('./models/UserModified');
 require('dotenv').config();
 const app = express();
 
@@ -51,23 +90,51 @@ app.use(express.json());
 
 app.use(cors({
     credentials: true,
-    origin: 'http://localhost:5174',
+    origin: 'http://localhost:5173',
 }));
 
+mongoose.connect(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
-mongoose.connect(process.env.MONGO_URL);
+const db = mongoose.connection;
 
+db.on('error', (error) => {
+  console.error('MongoDB connection error:', error);
+});
+
+db.once('open', () => {
+  console.log('MongoDB connected successfully');
+  // Start your Express server here
+  app.listen(4000, () => {
+    console.log('Server is running on port 4000');
+  });
+});
 
 app.get("/test", (req, res) => {
     res.json("test alright");
 });
 
 app.post("/signin", async (req, res) => {
-    const {name , email, password } = req.body;
-    res.json({ name ,email, password });
-})
+    const { name, email, password } = req.body;
+    User.create({
+        UserName: name,
+        email,
+        password
+    });
+    res.json("Sign up successful");
+});
+
+// ... (other routes or middleware)
+
+// Example route
+app.get("/", (req, res) => {
+  res.send("Hello, this is your Express server!");
+});
+
+// Make sure to add any other routes or middleware here
 
 app.listen(4000, () => {
     console.log("Server is running on port 4000");
 });
-
