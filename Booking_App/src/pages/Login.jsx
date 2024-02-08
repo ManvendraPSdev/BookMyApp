@@ -9,23 +9,19 @@ const SignIn = () => {
   const [password, setPassword] = useState('');
 
   // Function to handle form submission
-   const Login = async (e) => {
+   const Login = async function handleLoginSubmit (e) {
     e.preventDefault();
-    // axios.get("http://localhost:4000/test")
-    await axios.post("http://localhost:4000/signin" , {
-      UserName,
-      email ,
-      password ,
-    })
-      .then(response => {
-        console.log(response.data);
-        // Add your registration logic here
+    // axios.get("http://localhost:3000/test")
+    try{
+      await axios.post("http://localhost:3000/login" , {
+        UserName,
+        email ,
+        password ,
       })
-      .catch(error => {
-        alert("Login failed Please Try agian later ❌")
-        console.error('Error:', error);
-      });
-      alert("Login Sucessfull now you can Proceed 🟢🟢")
+    }
+    catch(e){
+      alert("Login Failed");
+    }
   };
 
   return (
